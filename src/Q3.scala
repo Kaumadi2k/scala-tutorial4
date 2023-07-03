@@ -7,17 +7,32 @@ type String and also outputs a String. This particular function will be used to 
 format to the "name" input.*/
 
 object Q3 {
-  def toUpper(name: String): String={
-    return name.toUpperCase
+  def toUpper(name: String, startIndex: Int, endIndex:Int): String={
+    var modifyName = name
+    for(i <- startIndex to endIndex){
+      val convertWord = modifyName.charAt(i).toUpper
+      modifyName = modifyName.updated(i, convertWord)
+    }
+    modifyName
   }
-  def toLower(name: String): String={
-    return name.toLowerCase
+
+  def toLower(name: String, startIndex: Int, endIndex: Int): String = {
+    var modifyName = name
+    for (i <- startIndex to endIndex) {
+      val convertWord = modifyName.charAt(i).toLower
+      modifyName = modifyName.updated(i, convertWord)
+    }
+    modifyName
   }
-  def formatName(name:String, f:String=>String): String={
-    return f(name)
+
+  def formatName(name: String, startIndex: Int, endIndex: Int, f: (String, Int, Int) => String): String = {
+    f(name, startIndex, endIndex)
   }
 
   def main(args: Array[String]): Unit={
-    print(formatName("kaumadi", toUpper))
+    println(toUpper("Benny", 0,4))
+    println(formatName("Niroshan", 0, 1 , toUpper))
+    println(formatName("Saman", 0, 0 , toLower))
+    println(formatName("Kumara", 5, 5 , toUpper))
   }
 }
